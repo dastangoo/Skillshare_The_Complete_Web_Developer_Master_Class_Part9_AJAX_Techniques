@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Learn AJAX</title>
+    <script>
+      function ajax_func() {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('GET', 'process.php', true);
+        xmlhttp.send();        
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="ajax_func();">Click to retrieve data</button>
+    <div id="get_data">
+      <!-- Get date here -->
+    </div>
+  </body>
+</html>
