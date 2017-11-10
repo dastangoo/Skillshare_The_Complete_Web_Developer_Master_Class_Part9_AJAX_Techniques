@@ -1,8 +1,11 @@
 <?php 
   include 'db.php';
   if (isset($_REQUEST['submit_form'])) {
-    // echo "The form has been submitted" . $_REQUEST['name'];
-    $ins_sql = "INSERT INTO users (u_name, u_email, u_number, u_notes) VALUES ('$_REQUEST[name]', '$_REQUEST[email]', '$_REQUEST[contact_number]', '$_REQUEST[notes]')";
+    $name = mysqli_real_escape_string($conn, strip_tags($_REQUEST['name']));
+    $email = mysqli_real_escape_string($conn, strip_tags($_REQUEST['email']));
+    $contact_number = mysqli_real_escape_string($conn, strip_tags($_REQUEST['contact_number']));
+    $notes = mysqli_real_escape_string($conn, strip_tags($_REQUEST['notes']));
+    $ins_sql = "INSERT INTO users (u_name, u_email, u_number, u_notes) VALUES ('$name', '$email', '$contact_number', '$notes')";
     mysqli_query($conn, $ins_sql);
     echo "
       <script>
@@ -15,7 +18,11 @@
     mysqli_query($conn, $del_sql);
   }
   if (isset($_REQUEST['edit_id'])) {
-    $up_sql = "UPDATE users SET u_name = '$_REQUEST[edit_name]', u_email = '$_REQUEST[edit_email]', u_number = '$_REQUEST[edit_contact_number]', u_notes = '$_REQUEST[edit_notes]' WHERE user_id = '$_REQUEST[edit_id]'";
+    $edit_name = mysqli_real_escape_string($conn, strip_tags($_REQUEST['edit_name']));
+    $edit_email = mysqli_real_escape_string($conn, strip_tags($_REQUEST['edit_email']));
+    $edit_contact_number = mysqli_real_escape_string($conn, strip_tags($_REQUEST['edit_contact_number']));
+    $edit_notes = mysqli_real_escape_string($conn, strip_tags($_REQUEST['edit_notes']));
+    $up_sql = "UPDATE users SET u_name = '$edit_name', u_email = '$edit_email', u_number = '$edit_contact_number', u_notes = '$edit_notes' WHERE user_id = '$_REQUEST[edit_id]'";
     mysqli_query($conn, $up_sql);
   }
   $sql = "SELECT * FROM users";
