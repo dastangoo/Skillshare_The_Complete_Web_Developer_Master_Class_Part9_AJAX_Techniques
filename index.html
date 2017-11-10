@@ -21,7 +21,7 @@
     <script>
       function ajax_func() {
         
-        var xmlhttp = new XMLHttpRequest();
+        xmlhttp = new XMLHttpRequest();
         // var user_input = document.getElementById('user-input').value;
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -30,6 +30,25 @@
         }
         xmlhttp.open('POST', 'process_ajax.php', true);
         xmlhttp.send();        
+      }
+      function submit_form() {
+        
+        var name = document.getElementById('name').value,
+            email = document.getElementById('email').value,
+            contact_number = document.getElementById('contact_number').value,
+            notes = document.getElementById('notes').value;
+            
+        // AJAX Processing from Here
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById('table_body').innerHTML = xmlhttp.responseText;
+          }
+        }
+
+        xmlhttp.open('GET', 'process_ajax.php?submit_form=yes&name=' + name +'&email=' + email + '&contact_number=' + contact_number + '&notes=' + notes, true);
+        xmlhttp.send();             
+        // AJAX Ending   
+        return false;
       }
     </script>
   </head>
@@ -47,25 +66,25 @@
                 <h4>Add New Person</h4>
               </div>
               <div class="modal-body">
-                <form method="post">
+                <form onsubmit="return submit_form();">
                   <div class="form-group">
                     <label for="name"></label>
-                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" autofocus>
                   </div>
                   <div class="form-group">
                     <label for="email"></label>
-                    <input type="text" class="form-control" id="email" placeholder="Your Email">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Your Email">
                   </div>
                   <div class="form-group">
                     <label for="contact_number"></label>
-                    <input type="text" class="form-control" id="contact_number" placeholder="Your Contact Number">
+                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Your Contact Number">
                   </div>
                   <div class="form-group">
                     <label for="notes"></label>
-                    <textarea class="form-control" id="notes"  rows="5" placeholder="Your Notes"></textarea>
+                    <textarea class="form-control" id="notes"  rows="5" name="notes" placeholder="Your Notes"></textarea>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-info btn-block btn-lg" name="submit">Submit</button>
+                    <button class="btn btn-info btn-block btn-lg" name="submit" id="submit">Submit</button>
                   </div>                  
                 </form>
               </div>

@@ -1,7 +1,7 @@
 <?php 
   include 'db.php';
-  if (isset($_POST['submit'])) {
-    echo "Success";
+  if (isset($_REQUEST['submit_form'])) {
+    echo "The form has been submitted" . $_REQUEST['name'];
   }
   $sql = "SELECT * FROM users";
   $run = mysqli_query($conn, $sql);
