@@ -14,6 +14,10 @@
     $del_sql = "DELETE FROM users WHERE user_id = '$_REQUEST[del_id]'";
     mysqli_query($conn, $del_sql);
   }
+  if (isset($_REQUEST['edit_id'])) {
+    $up_sql = "UPDATE users SET u_name = '$_REQUEST[edit_name]', u_email = '$_REQUEST[edit_email]', u_number = '$_REQUEST[edit_contact_number]', u_notes = '$_REQUEST[edit_notes]' WHERE user_id = '$_REQUEST[edit_id]'";
+    mysqli_query($conn, $up_sql);
+  }
   $sql = "SELECT * FROM users";
   $run = mysqli_query($conn, $sql);
   $c = 1;
@@ -21,13 +25,14 @@
       echo "
         <tr>
           <td>$c</td>
+          <td>$rows[user_id]</td>
           <td>$rows[u_name]</td>
           <td>$rows[u_email]</td>
           <td>$rows[u_number]</td>
           <td>$rows[u_notes]</td>
           <td class='text-left'>
-            <button class='btn btn-sucess' data-toggle='modal' data-target='#edit_person$c' data-backdrop='static'>Edit</button>
-            <div class='modal fade' id='edit_person$c'>
+            <button class='btn btn-sucess' data-toggle='modal' data-target='#edit_person$rows[user_id]' data-backdrop='static'>Edit</button>
+            <div class='modal fade' id='edit_person$rows[user_id]'>
               <div class='modal-dialog'>
                 <div class='modal-content'>
                   <div class='modal-header'>
@@ -35,25 +40,25 @@
                     <h4>Edit New Person</h4>
                   </div>
                   <div class='modal-body'>
-                  <form onsubmit='edit_form($rows[user_id]);' id='edit_form'>
+                  <form onsubmit='edit_form($rows[user_id]);' id='edit_form$rows[user_id]'>
                     <div class='form-group'>
-                      <label for='edit_form'>Name</label>
-                      <input type='text' class='form-control' id='edit_name' value=$rows[u_name] required>
+                      <label for='edit_form$rows[user_id]'>Name</label>
+                      <input type='text' class='form-control' id='edit_name$rows[user_id]' value=$rows[u_name] required>
                     </div>
                     <div class=form-group>
-                      <label for='edit_email'>Email</label>
-                      <input type='text' class='form-control' id='edit_email' value=$rows[u_email] required>
+                      <label for='edit_email$rows[user_id]'>Email</label>
+                      <input type='text' class='form-control' id='edit_email$rows[user_id]' value=$rows[u_email] required>
                     </div>
                     <div class='form-group'>
-                      <label for='edit_contact_number'>Contact Number</label>
-                      <input type='text' class='form-control' id='edit_contact_number' value=$rows[u_number] required>
+                      <label for='edit_contact_number$rows[user_id]'>Contact Number</label>
+                      <input type='text' class='form-control' id='edit_contact_number$rows[user_id]' value=$rows[u_number] required>
                     </div>
                     <div class='form-group'>
-                      <label for='edit_notes'>Notes</label>
-                      <textarea class='form-control' id='edit_notes'  rows='5' requried>$rows[u_notes]</textarea>
+                      <label for='edit_notes$rows[user_id]'>Notes</label>
+                      <textarea class='form-control' id='edit_notes$rows[user_id]'  rows='5' requried>$rows[u_notes]</textarea>
                     </div>
                     <div class='form-group'>
-                      <button class='btn btn-info btn-block btn-lg' id='submit'>Done Editing</button>
+                      <button class='btn btn-info btn-block btn-lg' id='submit$rows[user_id]'>Done Editing</button>
                     </div>                  
                   </form>
 
