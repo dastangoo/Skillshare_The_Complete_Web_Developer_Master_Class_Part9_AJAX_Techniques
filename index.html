@@ -19,24 +19,25 @@
     <script src="js/bootstrap.min.js">
     </script>
     <script>
-      function ajax_func(user_input) {
+      function ajax_func() {
         
         var xmlhttp = new XMLHttpRequest();
         // var user_input = document.getElementById('user-input').value;
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById('ret-data').innerHTML = xmlhttp.responseText;
+            document.getElementById('table_body').innerHTML = xmlhttp.responseText;
           }
         }
-        xmlhttp.open('GET', 'process_ajax.php?var1=' + user_input, true);
+        xmlhttp.open('POST', 'process_ajax.php', true);
         xmlhttp.send();        
       }
     </script>
   </head>
-  <body>
+  <body onload="ajax_func();">
     <div class="container">
       <br><br>
       <table class="table table-striped table-hover table-bordered text-center">
+        <!-- <button class="btn btn-warning btn-lg" onclick="ajax_func();">Click to Retrieve</button> -->
         <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#add_new_person" data-backdrop="static">Add New Person</button>
         <div class="modal fade" id="add_new_person">
           <div class="modal-dialog">
@@ -46,7 +47,7 @@
                 <h4>Add New Person</h4>
               </div>
               <div class="modal-body">
-                <form>
+                <form method="post">
                   <div class="form-group">
                     <label for="name"></label>
                     <input type="text" class="form-control" id="name" placeholder="Your Name">
@@ -64,7 +65,7 @@
                     <textarea class="form-control" id="notes"  rows="5" placeholder="Your Notes"></textarea>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-info btn-block btn-lg">Submit</button>
+                    <button class="btn btn-info btn-block btn-lg" name="submit">Submit</button>
                   </div>                  
                 </form>
               </div>
@@ -74,8 +75,7 @@
                 </div>
               </div>
             </div>
-          </div>
-          
+          </div>          
         </div>
         <br><br>
         <thead>
@@ -88,31 +88,7 @@
             <th>Edit / Delete</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>john.doe@mail.com</td>
-            <td>1223456789</td>
-            <td>Somehting</td>
-            <td><button class="btn btn-sucess">Edit</button><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>john.doe@mail.com</td>
-            <td>1223456789</td>
-            <td>Somehting</td>
-            <td><button class="btn btn-success">Edit</button><button class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>john.doe@mail.com</td>
-            <td>1223456789</td>
-            <td>Somehting</td>
-            <td><button class="btn btn-success">Edit</button><button class="btn btn-danger">Delete</button></td>
-          </tr>
+        <tbody id="table_body">
         </tbody>
       </table>
     </div>

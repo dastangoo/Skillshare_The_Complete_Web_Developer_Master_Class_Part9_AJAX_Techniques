@@ -1,19 +1,22 @@
 <?php 
-  $countries[] = 'United States';
-  $countries[] = 'United Kingdom';
-  $countries[] = 'United Arab Emirates';
-  $countries[] = 'Brazil';
-  $countries[] = 'India';
-  $countries[] = 'Pakistan';
-  $countries[] = 'Srilanka';
-  
-  echo '<br>';
-  foreach ($countries as $country) {
-    // echo $country;
-    if (isset($_REQUEST['var1'])) {
-      if($_REQUEST['var1'] == $country) {
-        echo '<div style="color: green;">' . $_REQUEST['var1'] . ' is in the list</div>';
-      }
-    }
+  include 'db.php';
+  if (isset($_POST['submit'])) {
+    echo "Success";
+  }
+  $sql = "SELECT * FROM users";
+  $run = mysqli_query($conn, $sql);
+  $c = 1;
+  while ($rows = mysqli_fetch_assoc($run)) {
+      echo "
+        <tr>
+          <td>$c</td>
+          <td>$rows[u_name]</td>
+          <td>$rows[u_email]</td>
+          <td>$rows[u_number]</td>
+          <td>$rows[u_notes]</td>
+          <td><button class='btn btn-sucess'>Edit</button><button class='btn btn-danger'>Delete</button></td>
+        </tr>
+      ";
+      $c++;
   }
 ?>
