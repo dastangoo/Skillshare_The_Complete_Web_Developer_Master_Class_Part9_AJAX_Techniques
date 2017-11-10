@@ -13,10 +13,10 @@
       }
     </style>
     <script>
-      function ajax_func() {
+      function ajax_func(user_input) {
         
         var xmlhttp = new XMLHttpRequest();
-        var user_input = document.getElementById('user-input').value;
+        // var user_input = document.getElementById('user-input').value;
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById('ret-data').innerHTML = xmlhttp.responseText;
@@ -34,7 +34,7 @@
         <button type="button" class="btn btn-primary form-control" onclick="ajax_func();">Click to Submit Data</button>
       </div>      
       <div class="form-group">
-        <input type="text" id="user-input" class="form-control" onkeyup="ajax_func();">
+        <input type="text" id="user-input" class="form-control" onkeyup="ajax_func(this.value);">
       </div>
     </form>
     <div id="ret-data" class="col-md-6 col-md-offset-3"></div>
