@@ -3,22 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title>Learn AJAX</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <style media="screen">
+      .form1 {
+        padding-top: 30px;
+      }
+      #ret-data {
+        text-align: center;
+      }
+    </style>
     <script>
       function ajax_func() {
+        
         var xmlhttp = new XMLHttpRequest();
+        var user_input = document.getElementById('user-input').value;
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            var receiver = document.getElementById('get_data');
-            receiver.innerHTML = xmlhttp.responseText;
+            document.getElementById('ret-data').innerHTML = xmlhttp.responseText;
           }
         }
-        xmlhttp.open('GET', 'process_ajax.php?var1=Walton&var2=', true);
+        xmlhttp.open('GET', 'process_ajax.php?var1=' + user_input, true);
         xmlhttp.send();        
       }
     </script>
   </head>
   <body>
-    <button onclick="ajax_func();">Click to retrieve data</button>
-    <div id="get_data" style="font-weight: bold;">The Receiver Div</div>
+    </div>
+    <form class="col-md-6 col-md-offset-3 form1">
+      <div class="form-group">
+        <button type="button" class="btn btn-primary form-control" onclick="ajax_func();">Click to Submit Data</button>
+      </div>      
+      <div class="form-group">
+        <input type="text" id="user-input" class="form-control" onkeyup="ajax_func();">
+      </div>
+    </form>
+    <div id="ret-data" class="col-md-6 col-md-offset-3"></div>
   </body>
 </html>
