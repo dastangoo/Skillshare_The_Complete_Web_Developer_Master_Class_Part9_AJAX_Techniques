@@ -19,10 +19,14 @@
     <script src="js/bootstrap.min.js">
     </script>
     <script>
+    
+      // AJAXify the whole date from the process_ajax.php 
       function ajax_func() {
         
         xmlhttp = new XMLHttpRequest();
         // var user_input = document.getElementById('user-input').value;
+        
+        // AJAX Processing from here
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById('table_body').innerHTML = xmlhttp.responseText;
@@ -30,7 +34,10 @@
         }
         xmlhttp.open('POST', 'process_ajax.php', true);
         xmlhttp.send();        
+        // AJAX End
+        
       }
+      // Inserting data to the database
       function submit_form() {
         var user_form = document.getElementById('user_form');
         var name = document.getElementById('name').value,
@@ -50,9 +57,19 @@
         // AJAX Ending   
         
         $('#add_new_person').hide();
-        // user_form.reset();
-        
-        return false;
+        // user_form.reset();        
+      }
+      
+      //Deleting data from the database
+      function delete_func(user_id) {
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById('table_body').innerHTML = xmlhttp.responseText;
+          }
+        }
+
+        xmlhttp.open('GET', 'process_ajax.php?del_id=' + user_id, true);
+        xmlhttp.send();                     
       }
     </script>
   </head>
@@ -70,7 +87,7 @@
                 <h4>Add New Person</h4>
               </div>
               <div class="modal-body">
-                <form onsubmit="return submit_form();" id="user_form">
+                <form onsubmit="submit_form();" id="user_form">
                   <div class="form-group">
                     <label for="name"></label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" autofocus required>

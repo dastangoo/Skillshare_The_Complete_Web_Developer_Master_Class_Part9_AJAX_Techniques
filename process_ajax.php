@@ -10,6 +10,10 @@
       </script>
     ";
   }
+  if (isset($_REQUEST['del_id'])) {
+    $del_sql = "DELETE FROM users WHERE user_id = '$_REQUEST[del_id]'";
+    mysqli_query($conn, $del_sql);
+  }
   $sql = "SELECT * FROM users";
   $run = mysqli_query($conn, $sql);
   $c = 1;
@@ -21,7 +25,10 @@
           <td>$rows[u_email]</td>
           <td>$rows[u_number]</td>
           <td>$rows[u_notes]</td>
-          <td><button class='btn btn-sucess'>Edit</button><button class='btn btn-danger'>Delete</button></td>
+          <td>
+            <button class='btn btn-sucess'>Edit</button>
+            <button class='btn btn-danger' onclick=delete_func('$rows[user_id]');>Delete</button>
+          </td>
         </tr>
       ";
       $c++;
