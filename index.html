@@ -32,7 +32,7 @@
         xmlhttp.send();        
       }
       function submit_form() {
-        
+        var user_form = document.getElementById('user_form');
         var name = document.getElementById('name').value,
             email = document.getElementById('email').value,
             contact_number = document.getElementById('contact_number').value,
@@ -48,6 +48,10 @@
         xmlhttp.open('GET', 'process_ajax.php?submit_form=yes&name=' + name +'&email=' + email + '&contact_number=' + contact_number + '&notes=' + notes, true);
         xmlhttp.send();             
         // AJAX Ending   
+        
+        $('#add_new_person').hide();
+        // user_form.reset();
+        
         return false;
       }
     </script>
@@ -66,22 +70,22 @@
                 <h4>Add New Person</h4>
               </div>
               <div class="modal-body">
-                <form onsubmit="return submit_form();">
+                <form onsubmit="return submit_form();" id="user_form">
                   <div class="form-group">
                     <label for="name"></label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" autofocus>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" autofocus required>
                   </div>
                   <div class="form-group">
                     <label for="email"></label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="Your Email">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Your Email" required>
                   </div>
                   <div class="form-group">
                     <label for="contact_number"></label>
-                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Your Contact Number">
+                    <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Your Contact Number" required>
                   </div>
                   <div class="form-group">
                     <label for="notes"></label>
-                    <textarea class="form-control" id="notes"  rows="5" name="notes" placeholder="Your Notes"></textarea>
+                    <textarea class="form-control" id="notes"  rows="5" name="notes" placeholder="Your Notes" required></textarea>
                   </div>
                   <div class="form-group">
                     <button class="btn btn-info btn-block btn-lg" name="submit" id="submit">Submit</button>
