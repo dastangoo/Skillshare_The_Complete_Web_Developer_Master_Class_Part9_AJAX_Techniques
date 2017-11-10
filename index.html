@@ -60,7 +60,7 @@
         // user_form.reset();        
       }
       
-      //Deleting data from the database
+      // Deleting data from the database
       function delete_func(user_id) {
         xmlhttp.onreadystatechange = function () {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -71,6 +71,26 @@
         xmlhttp.open('GET', 'process_ajax.php?del_id=' + user_id, true);
         xmlhttp.send();                     
       }
+      
+      // Editing function
+      function edit_form(user_id) {
+        alert(user_id);
+        var name = document.getElementById('name').value,
+            email = document.getElementById('email').value,
+            contact_number = document.getElementById('contact_number').value,
+            notes = document.getElementById('notes').value;
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById('table_body').innerHTML = xmlhttp.responseText;
+          }
+        }
+ 
+        xmlhttp.open('GET', 'process_ajax.php' + user_id, true);
+        xmlhttp.send();                             
+        
+        $('#edit_form').hide();
+      }
+      
     </script>
   </head>
   <body onload="ajax_func();">

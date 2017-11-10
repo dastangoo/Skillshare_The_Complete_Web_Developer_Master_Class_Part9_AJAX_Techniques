@@ -25,31 +25,32 @@
           <td>$rows[u_email]</td>
           <td>$rows[u_number]</td>
           <td>$rows[u_notes]</td>
-          <td>
-            <button class='btn btn-sucess' data-toggle='modal' data-target='#edit_person' data-backdrop='static'>Edit</button>
+          <td class='text-left'>
+            <button class='btn btn-sucess' data-toggle='modal' data-target='#edit_person$c' data-backdrop='static'>Edit</button>
             <div class='modal fade' id='edit_person$c'>
               <div class='modal-dialog'>
                 <div class='modal-content'>
                   <div class='modal-header'>
                     <button class='close' data-dismiss='modal'>&times;</button>
+                    <h4>Edit New Person</h4>
                   </div>
                   <div class='modal-body'>
-                  <form>
+                  <form onsubmit='edit_form($rows[user_id]);' id='edit_form'>
                     <div class='form-group'>
-                      <label for='name'>Name</label>
-                      <input type='text' class='form-control' id='name' value=$rows[u_name]>
+                      <label for='edit_form'>Name</label>
+                      <input type='text' class='form-control' id='edit_name' value=$rows[u_name] required>
                     </div>
                     <div class=form-group>
-                      <label for='email'>Email</label>
-                      <input type='text' class='form-control' id='email'>
+                      <label for='edit_email'>Email</label>
+                      <input type='text' class='form-control' id='edit_email' value=$rows[u_email] required>
                     </div>
                     <div class='form-group'>
-                      <label for='contact_number'></label>
-                      <input type='text' class='form-control' id='contact_number'>
+                      <label for='edit_contact_number'>Contact Number</label>
+                      <input type='text' class='form-control' id='edit_contact_number' value=$rows[u_number] required>
                     </div>
                     <div class='form-group'>
-                      <label for='notes'></label>
-                      <textarea class='form-control' id='notes'  rows='5'></textarea>
+                      <label for='edit_notes'>Notes</label>
+                      <textarea class='form-control' id='edit_notes'  rows='5' requried>$rows[u_notes]</textarea>
                     </div>
                     <div class='form-group'>
                       <button class='btn btn-info btn-block btn-lg' id='submit'>Done Editing</button>
