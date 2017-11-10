@@ -6,7 +6,14 @@
     <script>
       function ajax_func() {
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('GET', 'process.php', true);
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var receiver = document.getElementById('get_data');
+            // receiver.innerHTML = 'All is Well';
+            receiver.innerHTML = xmlhttp.responseText;
+          }
+        }
+        xmlhttp.open('GET', 'process_ajax.php', true);
         xmlhttp.send();        
       }
     </script>
